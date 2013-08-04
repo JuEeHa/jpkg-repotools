@@ -1,0 +1,7 @@
+#!/bin/sh
+cd pkg
+for i in *
+do
+	echo "creating: $i.jpkg"
+	tar czf ../$i.jpkg $i
+done

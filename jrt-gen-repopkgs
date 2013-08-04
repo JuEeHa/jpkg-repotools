@@ -1,0 +1,8 @@
+#!/bin/sh
+test -f repopkgs && rm repopkgs && touch repopkgs
+cd pkg
+for i in *
+do
+	echo "$i"
+	echo "$i	$(cat $i/version)" >> ../repopkgs
+done
