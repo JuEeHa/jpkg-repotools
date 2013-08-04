@@ -1,0 +1,10 @@
+Small tools for maintaining a jpkg repository
+
+### jrt-clone-repo URL
+clone a repo to current directory and set up pkg/ dir
+
+### jrt-gen-repopkgs
+read versions from extracted packages in pkg/ and generate repopkgs file based on that
+
+### jrt-create-jpkgs
+create .jpkg files from extracted packages in pkg/
