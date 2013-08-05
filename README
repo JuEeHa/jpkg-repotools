@@ -8,3 +8,6 @@ read versions from extracted packages in pkg/ and generate repopkgs file based o
 
 ### jrt-create-jpkgs
 create .jpkg files from extracted packages in pkg/
+
+### jrt-pull-updates URL
+pull and extract packages from repo that are new/missing on local repo

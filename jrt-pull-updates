@@ -1,0 +1,30 @@
+#!/bin/sh
+if test z$1 = z
+then
+	echo "usage: jrt-pull-updates URL"
+	exit 1
+fi
+
+TMP=$(mktemp)
+
+test -d pkg || mkdir pkg
+echo "fetching: repopkgs"
+wget -O $TMP $1/repopkgs 2> /dev/null
+for i in $(cut -f 1 $TMP)
+do
+	VER=$(grep "^$i	" repopkgs | cut -f 2)
+	RVER=$(grep "^$i	" $TMP | cut -f 2)
+	if test z"$({ echo $VER; echo $RVER;} | sort -rn | head -n 1)" != z"$VER"
+	then
+		echo "cloning: $i.jpkg"
+		wget -O $i.jpkg $1/$i.jpkg 2> /dev/null
+		cd pkg
+		test -d $i && rm -r $i
+		echo "creating: pkg/$i"
+		tar xzf ../$i.jpkg 
+		cd ..
+	fi
+done
+rm $TMP
+echo "creating: repopkgs"
+jrt-gen-repopkgs
